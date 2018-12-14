@@ -1,0 +1,23 @@
+{
+  "name": "js-blockchain",
+  "version": "1.0.0",
+  "description": "A deeper dive into blockchain by building one in JavaScript, with similar functionality found in production-level blockchains like Bitcoin or Ethereum.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanAlvares/js-blockchain.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanAlvares/js-blockchain/issues"
+  },
+  "homepage": "https://github.com/DanAlvares/js-blockchain#readme",
+  "dependencies": {
+    "sha256": "^0.2.0"
+  }
+}
