@@ -1,4 +1,5 @@
 # js-blockchain
+
 A deeper dive into blockchain by building one in JavaScript, with similar functionality found in production-level blockchains like Bitcoin or Ethereum.
 
 This project contains:
@@ -13,6 +14,8 @@ This project contains:
 - A broadcasting system to keep the data in the blockchain network synchronized.
 
 ## What is a Blockchain
+
 ### "An immutable, distributed ledger"
-**Ledger** - "a collection of financial accoounts or transactions"
+
+**Ledger** - "a collection of financial accoounts or transactions"  
 **Distributed** - Not controlled by one single entity. Run by many nodes (people/groups).
