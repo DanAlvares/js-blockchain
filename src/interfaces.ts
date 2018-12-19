@@ -1,14 +1,14 @@
 export interface Block {
-  index: Number;
-  timestamp: Number;
+  index: number;
+  timestamp: number;
   transactions: Transaction[];
-  nonce: Number;
-  hash: String;
-  previousBlockHash: String;
+  nonce: number;
+  hash: string;
+  previousBlockHash: string;
 }
 
 export interface Transaction {
-  amount: Number;
-  sender: String;
-  recipient: String;
+  amount: number;
+  sender: string;
+  recipient: string;
 }

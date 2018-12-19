@@ -4,10 +4,15 @@
   "description": "A deeper dive into blockchain by building one in JavaScript, with similar functionality found in production-level blockchains like Bitcoin or Ethereum.",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently -k -p \"[{name}]\" -n \"TypeScript, Node\" -c \"yello.bold, cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "start": "concurrently \"npm run watch-ts\" \"npm run watch-node\"",
     "test": "jest",
     "watch-ts": "tsc -w",
-    "watch-node": "nodemon dist/server.js"
+    "watch-node": "nodemon dist/server.js 3000",
+    "watch-node_1": "nodemon dist/server.js 3001",
+    "watch-node_2": "nodemon dist/server.js 3002",
+    "watch-node_3": "nodemon dist/server.js 3003",
+    "watch-node_4": "nodemon dist/server.js 3004",
+    "watch-node_5": "nodemon dist/server.js 3005"
   },
   "repository": {
     "type": "git",
@@ -21,6 +26,7 @@
   },
   "homepage": "https://github.com/DanAlvares/js-blockchain#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "sha256": "^0.2.0"
