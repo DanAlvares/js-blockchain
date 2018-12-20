@@ -1,9 +1,14 @@
 import { Block, Transaction } from './interfaces';
 import * as sha256 from 'sha256';
+import * as UUID from 'uuid/v1';
+
+const currentNodeUrl = process.argv[3];
 
 export class Blockchain {
   chain: Block[] = [];
+  currentNodeUrl: string = currentNodeUrl;
   pendingTransactions: Transaction[] = [];
+  networkNodes = [];
 
   constructor() {
     this.createNewBlock(100, '0', '0');
@@ -29,8 +34,13 @@ export class Blockchain {
     return this.chain[this.chain.length - 1];
   }
 
-  createNewTransaction(amount: number, sender: string, recipient: string): number {
-    this.pendingTransactions.push({ amount, sender, recipient });
+  createNewTransaction(amount: number, sender: string, recipient: string): Transaction {
+    const transactionId = UUID().replace(/-/g, '');
+    return { amount, sender, recipient, transactionId };
+  }
+
+  addToPendingTransactions(transaction: Transaction): number {
+    this.pendingTransactions.push(transaction);
     return Number(this.getLastBlock()['index']) + 1;
   }
 
