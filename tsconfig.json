@@ -12,6 +12,6 @@
       "*": ["node_modules/", "src/types/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "public/**/*"],
   "exclude": ["src/tests/**/*"]
 }
