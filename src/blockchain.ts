@@ -61,7 +61,7 @@ export class Blockchain {
     return nonce;
   }
 
-  chainIsValid(blockchain: Block[]) {
+  chainIsValid(blockchain: Block[]): boolean {
     let validChain = true;
 
     for (let i = 1, chainLen = blockchain.length; i < chainLen; i++) {
@@ -81,5 +81,46 @@ export class Blockchain {
     if (!correctNonce || !correctHash || !correctPreviousHash || !correctTransactions) validChain = false;
 
     return validChain;
+  }
+
+  getBlock(hash: string): Block {
+    return this.chain.filter(block => block.hash === hash)[0];
+  }
+
+  getTransaction(transactionId: string): any {
+    let correctBlock: Block;
+    let correctTransaction: Transaction;
+
+    this.chain.forEach(block => {
+      block.transactions.forEach(transaction => {
+        if (transaction.transactionId === transactionId) {
+          correctBlock = block;
+          correctTransaction = transaction;
+        }
+      });
+    });
+
+    return {
+      transaction: correctTransaction,
+      block: correctBlock
+    };
+  }
+
+  getAddress(address: string) {
+    const transactions = [];
+    this.chain.forEach(block => {
+      block.transactions.forEach(transaction => {
+        if (transaction.sender === address || transaction.recipient === address) {
+          transactions.push(transaction);
+        }
+      });
+    });
+
+    const balance = transactions.reduce((acc, val) => {
+      if (val.sender === address) return acc - val.amount;
+      if (val.recipient === address) return acc + val.amount;
+    }, 0);
+
+    return { balance, transactions };
   }
 }

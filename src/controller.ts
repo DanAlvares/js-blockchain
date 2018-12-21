@@ -215,3 +215,21 @@ export const consensus = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getAddress = (req: Request, res: Response) => {
+  const address = req.params.address;
+  const { balance, transactions } = blockchain.getAddress(address);
+  res.json({ balance, transactions });
+};
+
+export const getBlock = (req: Request, res: Response) => {
+  const blockHash = req.params.blockHash;
+  const block = blockchain.getBlock(blockHash);
+  res.json({ block });
+};
+
+export const getTransaction = (req: Request, res: Response) => {
+  const transactionId = req.params.transactionId;
+  const { block, transaction } = blockchain.getTransaction(transactionId);
+  res.json({ block, transaction });
+};

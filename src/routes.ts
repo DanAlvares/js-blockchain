@@ -3,7 +3,10 @@ import {
   broadcastTransaction,
   createNewTransaction,
   consensus,
+  getAddress,
+  getBlock,
   getBlockchain,
+  getTransaction,
   mineNewBlock,
   receiveNewBlock,
   registerAndBroadcastNode,
@@ -21,4 +24,8 @@ export function BlockchainRoutes(router: Router) {
   router.post('/register-multiple-nodes', registerMultipleNodes);
   router.post('/receive-new-block', receiveNewBlock);
   router.get('/consensus', consensus);
+
+  router.get('/block/:blockHash', getBlock);
+  router.get('/transaction/:transactionId', getTransaction);
+  router.get('/address/:address', getAddress);
 }

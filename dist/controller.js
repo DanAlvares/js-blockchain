@@ -185,3 +185,18 @@ exports.consensus = (req, res) => __awaiter(this, void 0, void 0, function* () {
         });
     }
 });
+exports.getAddress = (req, res) => {
+    const address = req.params.address;
+    const { balance, transactions } = blockchain.getAddress(address);
+    res.json({ balance, transactions });
+};
+exports.getBlock = (req, res) => {
+    const blockHash = req.params.blockHash;
+    const block = blockchain.getBlock(blockHash);
+    res.json({ block });
+};
+exports.getTransaction = (req, res) => {
+    const transactionId = req.params.transactionId;
+    const { block, transaction } = blockchain.getTransaction(transactionId);
+    res.json({ block, transaction });
+};
