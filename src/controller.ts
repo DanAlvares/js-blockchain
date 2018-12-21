@@ -174,3 +174,44 @@ export const receiveNewBlock = (req: Request, res: Response) => {
     });
   }
 };
+
+export const consensus = async (req: Request, res: Response) => {
+  const requestPromises = blockchain.networkNodes.map(nodeUrl => {
+    const requestOptions = {
+      uri: nodeUrl + '/api/blockchain',
+      method: 'GET',
+      json: true
+    };
+
+    return request(requestOptions);
+  });
+
+  const blockchains = await Promise.all(requestPromises);
+  const currentChainLength = blockchain.chain.length;
+  let maxChainLength = currentChainLength;
+  let newLongestChain = null;
+  let newPendingTransactions = null;
+
+  blockchains.forEach(currentBlockchain => {
+    if (currentBlockchain.chain.length > maxChainLength) {
+      maxChainLength = currentBlockchain.chain.length;
+      newLongestChain = currentBlockchain.chain;
+      newPendingTransactions = currentBlockchain.pendingTransactions;
+    }
+  });
+
+  if (!newLongestChain || (newLongestChain && !blockchain.chainIsValid(newLongestChain))) {
+    res.json({
+      message: 'Current chain has not been replaced',
+      chain: blockchain.chain
+    });
+  } else {
+    blockchain.chain = newLongestChain;
+    blockchain.pendingTransactions = newPendingTransactions;
+
+    res.json({
+      message: 'This chain has been replaced',
+      chain: blockchain.chain
+    });
+  }
+};

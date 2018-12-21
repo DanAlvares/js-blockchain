@@ -5,13 +5,13 @@ A deeper dive into blockchain by building one in JavaScript, with similar functi
 This project contains:
 
 - A proof of work algorithm to secure the network.
+- An API that will be used to interact with the blockchain from the internet.
+- Consensus algorithm to verify that the network nodes have valid data.
 - Hashing algorithms to secure the data within the blockchain.
 - The ability to mine (create) new, immutable, blocks that contain data.
 - The ability to create transactions and store them in blocks.
-- An API that will be used to interact with the blockchain from the internet.
-- It will be hosted on a decentralized blockchain network.
-- Consensus algorithms to verify that the network nodes have valid data and are synchronized.
 - A broadcasting system to keep the data in the blockchain network synchronized.
+- A synchronized network of nodes
 
 ## What is a Blockchain
 

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   broadcastTransaction,
   createNewTransaction,
+  consensus,
   getBlockchain,
   mineNewBlock,
   receiveNewBlock,
@@ -19,4 +20,5 @@ export function BlockchainRoutes(router: Router) {
   router.post('/register-and-broadcast-node', registerAndBroadcastNode);
   router.post('/register-multiple-nodes', registerMultipleNodes);
   router.post('/receive-new-block', receiveNewBlock);
+  router.get('/consensus', consensus);
 }

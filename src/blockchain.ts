@@ -60,4 +60,26 @@ export class Blockchain {
 
     return nonce;
   }
+
+  chainIsValid(blockchain: Block[]) {
+    let validChain = true;
+
+    for (let i = 1, chainLen = blockchain.length; i < chainLen; i++) {
+      const currentBlock = blockchain[i];
+      const { transactions, index, nonce } = currentBlock;
+      const previousBlock = blockchain[i - 1];
+      const blockHash = this.hashBlock(previousBlock.hash, JSON.stringify({ transactions, index }), nonce);
+
+      if (blockHash.substring(0, 4) !== '0000' || previousBlock.hash !== currentBlock.previousBlockHash) validChain = false;
+    }
+
+    const genesisBlock = blockchain[0];
+    const correctNonce = genesisBlock.nonce === 100;
+    const correctHash = genesisBlock.hash === '0';
+    const correctPreviousHash = genesisBlock.previousBlockHash === '0';
+    const correctTransactions = genesisBlock.transactions.length === 0;
+    if (!correctNonce || !correctHash || !correctPreviousHash || !correctTransactions) validChain = false;
+
+    return validChain;
+  }
 }

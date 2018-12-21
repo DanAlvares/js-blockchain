@@ -1,4 +1,5 @@
 import { Blockchain } from '../blockchain';
+import { blockchainData } from './blockchain-data';
 
 describe('Blockchain', () => {
   let ninjacoin;
@@ -25,14 +26,14 @@ describe('Blockchain', () => {
   });
 
   test('should create a NEW TRANSACTION', () => {
+    const newTransaction = ninjacoin.createNewTransaction(100, sender, recipient);
     ninjacoin.createNewBlock(1234, '78HEWGEFG3C24', '4837YUCON873Y');
-    ninjacoin.createNewTransaction(100, sender, recipient);
-    ninjacoin.createNewTransaction(200, sender, recipient);
-    ninjacoin.createNewTransaction(500, sender, recipient);
+    ninjacoin.addToPendingTransactions(newTransaction);
     ninjacoin.createNewBlock(23453456, 'XK8347YNC43Y', 'BVGHLNIUEH34I');
 
+    expect(newTransaction.transactionId).toBeDefined();
     expect(ninjacoin.chain[0].transactions.length).toBe(0);
-    expect(ninjacoin.chain[2].transactions.length).toBe(3);
+    expect(ninjacoin.chain[2].transactions.length).toBe(1);
   });
 
   test('should hash the block', () => {
@@ -47,5 +48,24 @@ describe('Blockchain', () => {
     const proofOfWork = ninjacoin.proofOfWork(previousBlockHash, currentBlockData);
     const verifiedOutput = ninjacoin.hashBlock(previousBlockHash, currentBlockData, proofOfWork);
     expect(verifiedOutput.substr(0, 4)).toBe('0000');
+  });
+
+  describe('Consensus Algorithm', () => {
+    test('should validate the chain using the "Longest Chain" method', () => {
+      const isChainValid = ninjacoin.chainIsValid(blockchainData.chain);
+      expect(isChainValid).toBe(true);
+    });
+
+    test('should catch invalid chain', () => {
+      blockchainData.chain[1].hash += 1;
+      const isChainValid = ninjacoin.chainIsValid(blockchainData.chain);
+      expect(isChainValid).toBe(false);
+    });
+
+    test('should catch invalid genesis block', () => {
+      blockchainData.chain[0].hash += 1;
+      const isChainValid = ninjacoin.chainIsValid(blockchainData.chain);
+      expect(isChainValid).toBe(false);
+    });
   });
 });

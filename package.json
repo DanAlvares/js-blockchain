@@ -7,12 +7,13 @@
     "start": "concurrently \"npm run watch-ts\" \"npm run watch-node\"",
     "test": "jest",
     "watch-ts": "tsc -w",
-    "watch-node": "nodemon dist/server.js 3000",
-    "watch-node_1": "nodemon dist/server.js 3001",
-    "watch-node_2": "nodemon dist/server.js 3002",
-    "watch-node_3": "nodemon dist/server.js 3003",
-    "watch-node_4": "nodemon dist/server.js 3004",
-    "watch-node_5": "nodemon dist/server.js 3005"
+    "watch-node": "nodemon dist/server.js 3000 http://localhost:3000",
+    "watch-node_1": "nodemon dist/server.js 3001 http://localhost:3001",
+    "watch-node_2": "nodemon dist/server.js 3002 http://localhost:3002",
+    "watch-node_3": "nodemon dist/server.js 3003 http://localhost:3003",
+    "watch-node_4": "nodemon dist/server.js 3004 http://localhost:3004",
+    "watch-node_5": "nodemon dist/server.js 3005 http://localhost:3005",
+    "all-nodes": "concurrently  \"npm run watch-node_1\" \"npm run watch-node_2\" \"npm run watch-node_3\" \"npm run watch-node_4\" \"npm run watch-node_5\""
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,8 @@
     "body-parser": "^1.18.3",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
     "sha256": "^0.2.0"
   },
   "devDependencies": {
