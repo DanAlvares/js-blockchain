@@ -1,6 +1,6 @@
 # js-blockchain
 
-A deeper dive into blockchain by building one in JavaScript, with similar functionality found in production-level blockchains like Bitcoin or Ethereum.
+A deeper dive into blockchain by building one in JavaScript, with similar functionality found in production-level cryptocurrencies like Bitcoin or Ethereum.
 
 This project contains:
 
